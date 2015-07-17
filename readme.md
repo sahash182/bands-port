@@ -1,1 +1,4 @@
-Sometimes I feel like i am unaware of so many things that is happening around me. Not all the news are important as much as major events happening around us. We live in a very small World called Earth where we have lots of friends and family all over. So my App is designed to atleast keep track of what is going on across the globe. My app will also provide the most important breaking news of ceratin parts of the world and is  divided into continents. It will also feed you the filtered breaking news, just to let you know what's happening around you. And could share the news instantly in your social medias.
+
+FindMyBand
+User Narrative:
+This is a really cool application which will allow users to either promote your music (bands) OR find local music in the area, also it will allows users to find cool bands near your area referencing your zip code.

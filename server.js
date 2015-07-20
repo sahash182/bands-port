@@ -14,7 +14,7 @@ var Band = require('./models/band');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/public'));
 
 
 //ROUTES
@@ -26,8 +26,7 @@ app.get('/signup', function (req, res){
 
 //serving index.html
 app.get('/', function(req, res) {
-  var index = __dirname + "/index.html";
-  res.sendFile(index);
+  res.sendFile= __dirname + "/public/index.html";
 });
 
 //get all the bands from the db

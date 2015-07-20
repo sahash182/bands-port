@@ -2,11 +2,7 @@ $(function() {
   // check if its connected
   console.log('I am here ');
 
-var baseUrl = "http://localhost:3000"
 
-$.get(baseUrl +'/', function(data){
-  console.log('hello');
-});
 
 
 

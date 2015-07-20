@@ -1,5 +1,6 @@
+//require mongoose
 var mongoose = require('mongoose'),
-
+//creating db model Schema
 Schema = mongoose.Schema;
 
 var bandSchema = new Schema({
@@ -10,5 +11,6 @@ var bandSchema = new Schema({
   about: { type:String, required: true },
 });
 
+//saving the Schema to var Band and exporting
 var Band = mongoose.model('Band', bandSchema);
 module.exports = Band;

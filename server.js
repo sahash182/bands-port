@@ -3,17 +3,37 @@ var express = require('express'),
     app = express(),
     _ = require('underscore'),
     cors = require('cors'),
+    ejs = require('ejs'),
     bodyParser = require('body-parser'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    User = require('./models/user'),
+  session = require('express-session');
 
 mongoose.connect(process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL 
   || 'mongodb://localhost/bands');
+
+//setting up models
+var User = require('./models/user');
 var Band = require('./models/band');
 
+//middleware
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// setting view engine to render html files
+// app.set('view engine', 'ejs');
+app.set('views', __dirname + '/public');
+app.set('view engine', 'ejs');
+// set session options
+app.use(session({
+  saveUninitialized: true,
+  resave: true,
+  secret: 'SuperSecretCookie',
+  cookie: { maxAge: 60000 }
+}));
+
+//static Routes
 app.use(express.static(__dirname + '/public'));
 
 
@@ -41,7 +61,7 @@ app.get('/api/bands', function (req, res) {
 app.post('/api/bands', function(req, res){
     //create newBand
     var newBand = new Band({
-      bandName: req.body.bandName,
+      name: req.body.name,
       genre: req.body.genre,
       zipCode: req.body.zipCode,
       picture: req.body.picture,
@@ -59,7 +79,7 @@ app.put('/api/bands/:id', function (req, res){
   var targetId = req.params.id;
   //find band by id in db
   Band.findOne({_id: targetId}, function (err, foundBand){
-    foundBand.bandName = req.body.bandName;
+    foundBand.name = req.body.name;
     foundBand.genre = req.body.genre;
     foundBand.zipCode = req.body.zipCode;
     foundBand.picture = req.body.picture;
@@ -71,6 +91,11 @@ app.put('/api/bands/:id', function (req, res){
   });
 });
 
+// get's search results page.
+app.get('/search',function(req,res){
+  res.render('views/search') 
+  
+});
 //delete#remove
 app.delete('/api/bands/:id', function (req, res){
   //set the value of the id

@@ -16,7 +16,7 @@ $('#submit-band').on('click', function(){
 
   $.ajax({
     type: "POST",
-    url: "localhost:3000/api/bands",
+    url: "https://bands-port.herokuapp.com/api/bands",
     data: bandObj,
     sucess: function(){
       bands.save(data);

@@ -6,25 +6,32 @@ var express = require('express'),
     ejs = require('ejs'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
-    User = require('./models/user'),
+    // User = require('./models/user'),
   session = require('express-session');
 
-mongoose.connect(process.env.MONGOLAB_URI ||
+//connecting to mongoDB of heroku or localhost
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL 
   || 'mongodb://localhost/bands');
+
 
 //setting up models
 var User = require('./models/user');
 var Band = require('./models/band');
 
+
 //middleware
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // setting view engine to render html files
 // app.set('view engine', 'ejs');
 app.set('views', __dirname + '/public');
 app.set('view engine', 'ejs');
+
+
 // set session options
 app.use(session({
   saveUninitialized: true,
@@ -49,13 +56,19 @@ app.get('/', function(req, res) {
   res.sendFile= __dirname + "/public/index.html";
 });
 
+//serving search.html
+app.get('/', function(req, res) {
+  res.sendFile= __dirname + "/public/views/search.html";
+});
+
 //get all the bands from the db
 app.get('/api/bands', function (req, res) {
   // find all foods in db
-  Band.find(function (err, bands) {
-    res.json(bands);
+  Band.find(function (err, band) {
+    res.json(band);
   });
 });
+
 
 //post# create
 app.post('/api/bands', function(req, res){
@@ -64,8 +77,9 @@ app.post('/api/bands', function(req, res){
       name: req.body.name,
       genre: req.body.genre,
       zipCode: req.body.zipCode,
-      picture: req.body.picture,
-      about: req.body.about
+      about: req.body.about,
+      picture: req.body.picture
+      
     });
     //save to DB
     newBand.save(function (err, savedBand){
@@ -82,8 +96,9 @@ app.put('/api/bands/:id', function (req, res){
     foundBand.name = req.body.name;
     foundBand.genre = req.body.genre;
     foundBand.zipCode = req.body.zipCode;
-    foundBand.picture = req.body.picture;
     foundBand.about = req.body.about;
+    foundBand.picture = req.body.picture;
+    
     //save  updated band in db
     foundBand.save(function (err, savedBand){
       res.json(savedBand);

@@ -13,7 +13,7 @@
  <!-- custom styles -->
   <link type="text/css" rel="stylesheet" href="style.css">
 
-	<title>Ports of Bands</title>
+	<title>Bands-Port</title>
 </head>
 <body>
 	
@@ -38,14 +38,11 @@
 	<!-- well-container -->
   	<div class="container">
   		<div class="well well-sm">
-    		<h2> Welcome to Ports Of Band</h2>
+    		<h2> Welcome to Bands-PORT</h2>
     	</div>
     	<!-- main body/ columns -->
     		<div class="col-md-8">
     			<div class="well">
-    				<p>Headlines news feed</p>
-    				<p>Headlines news feed</p>
-    				<p>Headlines news feed</p>
     				<p>Headlines news feed</p>
     				<p>Headlines news feed</p>
     				<p>Headlines news feed</p>
@@ -58,21 +55,30 @@
     				<li>Green Day</li>
     				<li>Green Day</li>
     				<li>Green Day</li>
-    				<li>Green Day</li>
-    				<li>Green Day</li>
-    				<li>Green Day</li>
-    				<li>Green Day</li>
-    				<li>Green Day</li>
-    				<li>Green Day</li>
+    				
   				</div>  		
     		</div>
 	</div>
+	<!-- well for the template data -->
+	<div class ="well" id="bands"></div>
+
 	<div class="margin-top-20">
 		<a href="#" data-toggle="modal" data-target="#add-band" class="btn btn-primary">Add New Band</a>
 	</div><br>
-	<div class="margin-top-20">
-		<a href="#" data-toggle="modal" data-target="#search-band" class="btn btn-info">Search Bands</a>
-	</div>
+	<div class='well'>
+      <form id="search-band">
+        <div class='form-group'>
+          <label for="text">Search Bands</label>
+          <input class="form-control" id="zipCode" type="text" name="text" placeholder="Your ZipCode?"/>
+        </div>
+        <div class='text-right'>
+          <button class="btn btn-primary" id="find-band" type="submit">Search Bands</button>
+          <br>
+          <small class='text-muted'>Find Bands in your Area...</small>
+        </div>
+      </form>
+    </div>
+
 
 	<!--Add Band Modal-->
 	<div id="add-band" class="modal fade">
@@ -101,18 +107,20 @@
 					<div class="margin-top-20">
 						<input id="zipCode" type="text" class="form-control" />
 					</div>
-					<div class="bold">
-						Picture
-					</div>
-					<div class="margin-top-20">
-						<input id="picture" type="text" class="form-control" />
-					</div>
 					<div class="bold margin-top-20">
 						About
 					</div>
 					<div class="margin-top-20">
 						<textarea id="about" class="form-control"></textarea>
 					</div>
+					<div class="bold">
+						Picture
+					</div>
+					<div class="margin-top-20">
+						<input id="picture" type="text" class="form-control" />
+					</div>
+					
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -122,37 +130,6 @@
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 	<!--/Add Band Modal-->
-
-	<!--Search Band Modal-->
-	<div id="search-band" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Search Bands</h4>
-				</div>
-				<div class="modal-body">
-					<div class="bold">
-						Zip Code
-					</div>
-					<div class="margin-top-20">
-						<input id="zip-code" type="text" class="form-control" />
-					</div>
-					<div class="bold">
-						Genre
-					</div>
-					<div class="margin-top-20">
-						<input id="genre" type="text" class="form-control" />
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button id="search-band" type="button" class="btn btn-primary">Search Band</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-	<!--/Search Band Modal-->
 
 	<!--Login Modal-->
 	<div id="login" class="modal fade">
@@ -223,11 +200,15 @@
 	<!--/Sign Up Modal-->
 
 
-
-
-
-	
-
+	<script id="bandTemplate" type="text/template">
+    <li class='band'>
+    	<img src="<%= picture %>" class="img-responsive" />
+      	<p class='bold'><%= name %></p>
+      	<p class='bold'><%= genre %></p>
+      	<p class='bold'><%= zipCode %></p>
+      	<p class='bold'><%= about %></p>
+    </li>
+  </script>
 	
 <!--jQuery-->
 <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>

@@ -1,15 +1,16 @@
 $(function() {
   // check if its connected
-  console.log('I am here ');
+  // console.log('I am here ');
+
   var baseUrl = "http://localhost:3000"; // mongoDB localhost
   // var baseUrl = "https://bands-port.herokuapp." //mongoDB heroku
 
   $band = _.template($('#bandTemplate').html());
 
   //search with requested zipcode
-  $('#search-band').on('submit', function(e){
-    console.log('heloo');
-    e.preventDefault();
+  $('#search-band').on('submit', function(event){
+    // console.log('heloo');
+    event.preventDefault();
     //find the ones with the matching zipcode
       $.get(baseUrl + '/api/bands/' + $('#search-band').val(), function(data){
           var bands = data;    
@@ -19,11 +20,8 @@ $(function() {
           });
       }).fail(function(){
          alert("cannot find on That ZIP Code");
-      })
-    
+      }); 
   });
-
-
 
   //add band to find bands from db 
 $('#submit-band').on('click', function(event){

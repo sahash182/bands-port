@@ -27,6 +27,7 @@ UserSchema.statics.createSecure = function (userData, callback) {
       
       // create the new user (save to db) with hashed password
       that.create({
+        fullName: userData.fullName,
         email: email,
         passwordDigest: hash
       }, callback);
@@ -42,7 +43,7 @@ UserSchema.statics.authenticate = function (email, password, callback) {
     
     // throw error if can't find user
     if (user === null) {
-      throw new Error('Invalid email or password');
+      throw new Error('Invalid email or password' + email);
 
     // if found user, check if password is correct
     } else if (user.checkPassword(password)) {

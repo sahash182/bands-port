@@ -6,14 +6,12 @@ var express = require('express'),
     ejs = require('ejs'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
-    // User = require('./models/user'),
+    config = require('./config'),
   session = require('express-session');
 
+
 //connecting to mongoDB of heroku or localhost
-mongoose.connect(
-  process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL 
-  || 'mongodb://localhost/bands');
+mongoose.connect(config.MONGO_URI);
 
 
 //setting up models
@@ -24,42 +22,91 @@ var Band = require('./models/band');
 //middleware
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.static(__dirname + '/public'));
 
 // setting view engine to render html files
 // app.set('view engine', 'ejs');
 app.set('views', __dirname + '/public');
 app.set('view engine', 'ejs');
 
+
 // set/ configure session
 app.use(session({
   saveUninitialized: true,
   resave: true,
-  secret: 'SuperSecretCookie',
+  secret: config.SESSION_SECRET,
   cookie: { maxAge: 60000 }
 }));
 
-//static Routes
-app.use(express.static(__dirname + '/public'));
+// middleware to manage sessions
+app.use('/', function (req, res, next) {
+  // saves userId in session for logged-in user
+  req.login = function (user) {
+    req.session.userId = user.id;
+  };
+
+  // finds user currently logged in based on `session.userId`
+  req.currentUser = function (callback) {
+    User.findOne({_id: req.session.userId}, function (err, user) {
+      req.user = user;
+      callback(null, user);
+    });
+  };
+
+  // destroy `session.userId` to log out user
+  req.logout = function () {
+    req.session.userId = null;
+    req.user = null;
+  };
+
+  next();
+});
 
 
 //ROUTES
-
-
-//signup routes
-app.get('/signup', function (req, res){
-  res.send('coming');
-});
-
-//serving index.html
+//serving index.html HomePage
 app.get('/', function(req, res) {
   res.sendFile= __dirname + "/public/index.html";
 });
 
-//serving search.html
-app.get('/', function(req, res) {
-  res.sendFile= __dirname + "/public/views/search.html";
+
+// AUTH ROUTES (SIGN UP, LOG IN, LOG OUT)
+
+// create new user with secure password
+app.post('/users', function (req, res) {
+  var newUser = req.body.user;
+  User.createSecure(newUser, function (err, user) {
+    // log in user immediately when created
+    req.login(user);
+    res.redirect('/');
+  });
 });
+
+// authenticate user and set session
+app.post('/login', function (req, res) {
+  var userData = req.body.user;
+  User.authenticate(userData.email, userData.password, function (err, user) {
+    req.login(user);
+    res.redirect('/');
+  });
+});
+
+// log out user (destroy session)
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+// API routes
+
+// show current user
+app.get('/api/users/current', function (req, res) {
+  // check for current (logged-in) user
+  req.currentUser(function (err, user) {
+    res.json(user);
+  });
+});
+
 
 //get all the bands from the db
 app.get('/api/bands', function (req, res) {
@@ -134,7 +181,7 @@ app.delete('/api/bands/:id', function (req, res){
 });
 
 //connecting it to the server or port 3000
-app.listen(process.env.PORT || 3000);
+app.listen(config.PORT);
 console.log('server started on locahost:3000');
 
 

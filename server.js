@@ -31,8 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', __dirname + '/public');
 app.set('view engine', 'ejs');
 
-
-// set session options
+// set/ configure session
 app.use(session({
   saveUninitialized: true,
   resave: true,
@@ -45,6 +44,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 //ROUTES
+
 
 //signup routes
 app.get('/signup', function (req, res){
@@ -66,6 +66,17 @@ app.get('/api/bands', function (req, res) {
   // find all foods in db
   Band.find(function (err, band) {
     res.json(band);
+  });
+});
+
+//find one band with zipcode
+app.get('/api/bands/:zipCode', function (req, res) {
+  // set the value of the id
+  var targetZip = req.params.zipCode;
+
+  // find phrase in db by id
+  Band.findOne({zipCode: targetZip}, function (err, foundBand) {
+    res.json(foundBand);
   });
 });
 
@@ -106,11 +117,12 @@ app.put('/api/bands/:id', function (req, res){
   });
 });
 
-// get's search results page.
-app.get('/search',function(req,res){
-  res.render('views/search') 
-  
-});
+// // get's search results page.
+// app.get('/search',function(req,res){
+//   res.render('views/search') 
+// });
+
+
 //delete#remove
 app.delete('/api/bands/:id', function (req, res){
   //set the value of the id

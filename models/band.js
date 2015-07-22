@@ -6,10 +6,9 @@ Schema = mongoose.Schema;
 var bandSchema = new Schema({
   name: { type:String, required: true },
   genre: { type:String, required: true },
-  zipCode: { type:Number, required: true },
+  zipCode: { type:Number, required: true},
   about: { type:String, required: true },
   picture: { type:String, required: true },
-  
 });
 
 //saving the Schema to var Band and exporting

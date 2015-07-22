@@ -6,24 +6,32 @@ $(function() {
 
   $band = _.template($('#bandTemplate').html());
 
-  $.get(baseUrl + '/api/bands', function(data){
-    var bands = data;
+  //search with requested zipcode
+  $('#search-band').on('submit', function(e){
+    console.log('heloo');
+    e.preventDefault();
+    //find the ones with the matching zipcode
+      $.get(baseUrl + '/api/bands/' + $('#search-band').val(), function(data){
+          var bands = data;    
+          _.each(bands, function(band) {
+            console.log(band);
+            $('#bands').append($band(band));
+          });
+      }).fail(function(){
+         alert("cannot find on That ZIP Code");
+      })
     
-     _.each(bands, function(band) {
-      console.log(band);
-      $('#bands').append($band(band));
-    });
   });
 
 
 
   //add band to find bands from db 
-$('#submit-band').on('click', function(){
+$('#submit-band').on('click', function(event){
   event.preventDefault();
   var bandObj = {
       name: $('#name').val(),
       genre: $('#genre').val(),
-      zipCode: $('#zipCode').val(),
+      zipCode: $('#zip-code').val(),
       about: $('#about').val(),
       picture: $('#picture').val()
   };
@@ -35,27 +43,26 @@ $('#submit-band').on('click', function(){
     data: bandObj,
     sucess: function(data){
       console.log(data);
-      // window.location.reload();
-    } 
+      window.location.reload();
+    }
   });
 });
 
-//get bands
-$('#search-band').on('click', function(){
-  event.preventDefault();
-  console.log('hello');
-  $.ajax({
-    type: "GET",
-    url: "/api/bands",
-    success: function(data) {
-      var template = _.template($("#band-template").html());
-          _.each(data, function(band) {
-          $("#band-container").append(template(band));
-      });
-    }
-  // window.location.href = ("search.html");
-  });
-});
+// //get bands
+// $('#search-band').on('click', function(){
+//   event.preventDefault();
+//   console.log('hello');
+//   $.ajax({
+//     type: "GET",
+//     url: "/api/bands",
+//     success: function(data) {
+//       var template = _.template($("#band-template").html());
+//           _.each(data, function(band) {
+//           $("#band-container").append(template(band));
+//       });
+//     }
+//   });
+// });
 
 
 

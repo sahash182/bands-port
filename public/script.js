@@ -1,13 +1,7 @@
 $(function() {
-  // check if its connected
-  // console.log('I am here ');
 
-  // $.get('/api/me', function(data) {
-  //   console.log(data)
-  // })
-
-  var baseUrl = "http://localhost:3000"; // mongoDB localhost
-  // var baseUrl = "https://bands-port.herokuapp." //mongoDB heroku
+  // var baseUrl = "http://localhost:3000"; // mongoDB localhost
+  var baseUrl = "https://bands-port.herokuapp." //mongoDB heroku
 
   $band = _.template($('#bandTemplate').html());
 

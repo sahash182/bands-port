@@ -1,6 +1,37 @@
 body{
-	background-color: gray;
+	background-image: url('http://s3.amazonaws.com/filepicker-images-rapgenius/tvThuMmoTtmRU9pgJLJl_animated-gif-music.gif');
+	background-size: cover;
 }
+h2{
+	color: #00FF00;
+	background-color: black;
+}
+
+li  {
+	margin:0 auto;
+	list-style: none;
+	border: 2px solid;
+	text-align: center;
+}
+.alignright{
+	background-color: black;
+}
+.bold {
+	text-align: center;
+	font-style: bolder;
+}
+
+.img-responsive{
+	margin: 0 auto;
+}
+#header-top{
+	background-color: black;
+}
+#well-search {
+	width: 45%;
+	margin: 0 auto;
+}
+
 #login-btn {
     display: inline;
 }
@@ -10,4 +41,16 @@ body{
 }
 #signup-btn {
     display: inline;
+}
+#sidebar{
+	background-color: black;
+}
+#add-btn{
+	margin-bottom: 20px;
+	margin-left: 45%;
+	width: 100px;
+}
+#bands{
+	margin: 0 auto;
+	width:400px;
 }

@@ -1,3 +1,13 @@
 body{
 	background-color: gray;
 }
+#login-btn {
+    display: inline;
+}
+
+#logout-btn {
+    display: none;
+}
+#signup-btn {
+    display: inline;
+}

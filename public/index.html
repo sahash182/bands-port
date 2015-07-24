@@ -22,23 +22,17 @@
 	<!-- navbar div -->
 	<div class="well well-md">
 		<!-- navbar -->
-		<ul class="nav nav-pills">
-  			<div class="margin-top-20">
-				<a href="#" class="btn btn-primary">Home</a>
-			</div>
-  			<div class="margin-top-20">
-				<a href="#" data-toggle="modal" data-target="#login" class="btn btn-info">LogIn</a>
-			</div>
-  			<div class="margin-top-20">
-				<a href="#" data-toggle="modal" data-target="#signUp" class="btn btn-info">SignUp</a>
-			</div>
-		</ul>
-	</div>
+    <div class="alignright">
+        <button class="btn-primary" type="button" data-toggle="modal" data-target="#signup-modal" id="signup-btn">Sign Up</button>
+        <button class="btn-primary" type="button" data-toggle="modal" data-target="#login-modal" id="login-btn">Login</button>
+        <button class="btn-primary" type="button" id="logout-btn">Logout</button>
+    </div>
+    <br>
 
 	<!-- well-container -->
-  	<div class="container">
-  		<div class="well well-sm">
-    		<h2> Welcome to Bands-PORT</h2>
+  	<div class="container" >
+  		<div class="well well-sm" id="header">
+    		<h2> Bands-PORTs</h2>
     	</div>
     	<!-- main body/ columns -->
     		<div class="col-md-8">
@@ -62,11 +56,10 @@
 	<!-- well for the template data -->
 	<div class ="well" id="bands"></div>
 
-	<div class="margin-top-20">
-		<a href="#" data-toggle="modal" data-target="#add-band" class="btn btn-primary">Add New Band</a>
-	</div><br>
+  <button class="btn-primary" type="button" data-toggle="modal" data-target="#add-band" id="add-btn">Add Band</button>
+  <br>
 	<div class='well'>
-      <form id="search-band">
+      <form id="search-band" width="400px">
         <div class='form-group'>
           <label for="text">Search Bands</label>
           <input class="form-control" id="zipCode" type="text" name="text" placeholder="Your ZipCode?"/>
@@ -118,9 +111,7 @@
 					</div>
 					<div class="margin-top-20">
 						<input id="picture" type="text" class="form-control" />
-					</div>
-					
-					
+					</div>					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -131,85 +122,76 @@
 	</div><!-- /.modal -->
 	<!--/Add Band Modal-->
 
-	<!--Login Modal-->
-	<div id="login" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Log In</h4>
-				</div>
-				<div class="modal-body">
-					<div class="bold">
-						Email
-					</div>
-					<div class="margin-top-20">
-						<input id="email" type="text" class="form-control" />
-					</div>
-					<div class="bold">
-						Password
-					</div>
-					<div class="margin-top-20">
-						<input id="password" type="text" class="form-control" />
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button id="submit-Band" type="button" class="btn btn-primary">Log In</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-	<!--/Log In Modal-->
 
-	<!--Signup Modal-->
-	<div id="signUp" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Sign Up</h4>
-				</div>
-				<div class="modal-body">
-					<div class="bold">
-						Full Name
-					</div>
-					<div class="margin-top-20">
-						<input id="full-name" type="text" class="form-control" />
-					</div>
-					<div class="bold">
-						Email
-					</div>
-					<div class="margin-top-20">
-						<input id="email1" type="text" class="form-control" />
-					</div>
-					<div class="bold">
-						Password
-					</div>
-					<div class="margin-top-20">
-						<input id="password1" type="text" class="form-control" />
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button id="submit-Band" type="button" class="btn btn-primary">Sign Up</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-	<!--/Sign Up Modal-->
+	<!-- signup modal -->
+  <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signupModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+        </div>
+        <form class="signup-form" id="signup">
+          <div class="modal-body">
+            <div class="form-group">
+              <input type="text" name="user[firstName]" id="signup-firstName" class="form-control" placeholder="First Name">
+            </div>
+            <div class="form-group">
+              <input type="text" name="user[lastName]"  id="signup-lastName"class="form-control" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+              <input type="email" name="user[email]" id="signup-email" class="form-control" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input type="password" name="user[password]" id="signup-password" class="form-control" placeholder="Password">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" value="Sign Up" class="btn btn-primary">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
+
+  <!-- login modal -->
+  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="loginModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Log In</h4>
+        </div>
+        <form class="login-form" id="login">
+          <div class="modal-body">
+            <div class="form-group">
+              <input type="email" name="user[email]" id="login-email" class="form-control" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input type="password" name="user[password]" id="login-password" class="form-control" placeholder="Password">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" href="/user" value="Log In" class="btn btn-primary">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 	<script id="bandTemplate" type="text/template">
     <li class='band'>
-    	<img src="<%= picture %>"  width="200px" class="img-responsive" />
-      	<p class='bold'><%= name %></p>
-      	<p class='bold'><%= genre %></p>
-      	<p class='bold'><%= zipCode %></p>
-      	<p class='bold'><%= about %></p>
+    	<img src="<%= picture %>"  width="200px" class="img-responsive" />&nbsp;
+      	<p class='bold'>Name: <%= name %></p>
+      	<p class='bold'>Genre: <%= genre %></p>
+      	<p class='bold'>Zip Code: <%= zipCode %></p>
+      	<p class='bold'>About: <%= about %></p>
     </li>
   </script>
-	
+
 <!--jQuery-->
 <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 

@@ -8,8 +8,10 @@ var Band = require('./band');
 
   //define user Schema
   var UserSchema = new Schema({
+    firstName: String,
+    lastName: String,
     email: String,
-    passwordDigest: String,
+    password: String,
     bands: [Band.schema] // embedded
   });
 
@@ -23,13 +25,12 @@ UserSchema.statics.createSecure = function (userData, callback) {
   // hash password user enters at sign up
   bcrypt.genSalt(function (err, salt) {
     bcrypt.hash(userData.password, salt, function (err, hash) {
-      console.log(hash);
-      
       // create the new user (save to db) with hashed password
       that.create({
-        fullName: userData.fullName,
-        email: email,
-        passwordDigest: hash
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        password: hash
       }, callback);
     });
   });
@@ -43,7 +44,9 @@ UserSchema.statics.authenticate = function (email, password, callback) {
     
     // throw error if can't find user
     if (user === null) {
-      throw new Error('Invalid email or password' + email);
+      console.log("err");
+      callback('login failed', null);
+      // throw new Error('Invalid email or password' + email);
 
     // if found user, check if password is correct
     } else if (user.checkPassword(password)) {
@@ -55,7 +58,7 @@ UserSchema.statics.authenticate = function (email, password, callback) {
 // compare password user enters with hashed password (`passwordDigest`)
 UserSchema.methods.checkPassword = function (password) {
   // run hashing algorithm (with salt) on password user enters in order to compare with `passwordDigest`
-  return bcrypt.compareSync(password, this.passwordDigest);
+  return bcrypt.compareSync(password, this.password);
 };
 
 
@@ -64,3 +67,4 @@ var User = mongoose.model('User', UserSchema);
 
 //export user model
 module.exports = User;
+

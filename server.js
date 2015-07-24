@@ -6,23 +6,34 @@ var express = require('express'),
     ejs = require('ejs'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
-    config = require('./config'),
-  session = require('express-session');
-
+    // config = require('./config'),
+    session = require('express-session');
 
 //connecting to mongoDB of heroku or localhost
-mongoose.connect(config.MONGO_URI);
-
+mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || require('./config').MONGO_URI);
 
 //setting up models
 var User = require('./models/user');
 var Band = require('./models/band');
 
 
+//serving index.html HomePage
+app.get('/', function(req, res) {
+  // console.log('hello')
+  res.sendFile(__dirname + "/public/index.html");
+});
+
+//serving user.html UserPage
+app.get('/user', function(req, res) {
+  // console.log('hello')
+  res.sendFile(__dirname + "/public/views/user.html");
+});
+
 //middleware
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
+
 
 // setting view engine to render html files
 // app.set('view engine', 'ejs');
@@ -34,7 +45,7 @@ app.set('view engine', 'ejs');
 app.use(session({
   saveUninitialized: true,
   resave: true,
-  secret: config.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || require('./config').SESSION_SECRET,   
   cookie: { maxAge: 60000 }
 }));
 
@@ -62,53 +73,82 @@ app.use('/', function (req, res, next) {
   next();
 });
 
-
-//ROUTES
-//serving index.html HomePage
-app.get('/', function(req, res) {
-  res.sendFile= __dirname + "/public/index.html";
+app.all('/*', function(req, res, next){
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
 });
 
 
 // AUTH ROUTES (SIGN UP, LOG IN, LOG OUT)
 
+//route to get user
+
 // create new user with secure password
-app.post('/users', function (req, res) {
-  var newUser = req.body.user;
-  User.createSecure(newUser, function (err, user) {
+app.post('/signup', function (req, res) {
+
+   var newUser = new User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password
+   });
+   User.createSecure(newUser, function (err, user) {
+     // log in user immediately when created
+      req.login(user);
+      console.log(user);
+      res.send(user);
     // log in user immediately when created
-    req.login(user);
-    res.redirect('/');
+  });
+});
+//find user by id
+app.get('/api/current', function (req, res) {
+  User.findById(req.session.userId).exec(function(err, user) {
+    res.json(user);
   });
 });
 
 // authenticate user and set session
 app.post('/login', function (req, res) {
-  var userData = req.body.user;
+  var userData = {
+              email: req.body.email,
+              password: req.body.password
+            };
   User.authenticate(userData.email, userData.password, function (err, user) {
-    req.login(user);
-    res.redirect('/');
+    if(user){
+      req.login(user);
+      res.json(user);
+    }else {
+      res.send(err);
+      console.log(err);
+    }
+    console.log("hello " + userData.email);
   });
 });
+
+
+//show user view
+app.get("/me", function (req, res) {
+    //find user currently logged in
+    req.currentUser(function (err, user) {
+        console.log(req.currentUser);
+        res.json(user);
+    });
+});
+
 
 // log out user (destroy session)
-app.get('/logout', function (req, res) {
+app.get("/logout", function (req, res) {
+  console.log("logging out " + req.session.userId);
   req.logout();
-  res.redirect('/');
+  res.redirect("/");
 });
 
-// API routes
 
-// show current user
-app.get('/api/users/current', function (req, res) {
-  // check for current (logged-in) user
-  req.currentUser(function (err, user) {
-    res.json(user);
-  });
-});
 
+/////////// APIs for bands routes///////////////////
 
 //get all the bands from the db
+
 app.get('/api/bands', function (req, res) {
   // find all foods in db
   Band.find(function (err, band) {
@@ -116,16 +156,16 @@ app.get('/api/bands', function (req, res) {
   });
 });
 
-//find one band with zipcode
-app.get('/api/bands/:zipCode', function (req, res) {
-  // set the value of the id
-  var targetZip = req.params.zipCode;
+// //find one band with zipcode
+// app.get('/api/bands/:zipcode', function (req, res) {
+//   // set the value of the id
+//   var targetZip = req.params.userZipCode;
 
-  // find phrase in db by id
-  Band.findOne({zipCode: targetZip}, function (err, foundBand) {
-    res.json(foundBand);
-  });
-});
+//   // find phrase in db by id
+//   Band.findOne({zipCode: targetZip}, function (err, foundBand) {
+//     res.json(foundBand);
+//   });
+// });
 
 
 //post# create
@@ -164,11 +204,6 @@ app.put('/api/bands/:id', function (req, res){
   });
 });
 
-// // get's search results page.
-// app.get('/search',function(req,res){
-//   res.render('views/search') 
-// });
-
 
 //delete#remove
 app.delete('/api/bands/:id', function (req, res){
@@ -181,8 +216,8 @@ app.delete('/api/bands/:id', function (req, res){
 });
 
 //connecting it to the server or port 3000
-app.listen(config.PORT);
-console.log('server started on locahost:3000');
-
+app.listen(process.env.PORT || require('./config').PORT, function(){
+  console.log('server started on locahost:3000');
+});
 
 

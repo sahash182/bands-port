@@ -1,7 +1,7 @@
 $(function() {
 
   // var baseUrl = "http://localhost:3000"; // mongoDB localhost
-  var baseUrl = "https://bands-port.herokuapp." //mongoDB heroku
+  var baseUrl = "https://bands-port.herokuapp.com" //mongoDB heroku
 
   $band = _.template($('#bandTemplate').html());
 

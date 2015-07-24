@@ -1,53 +1,17 @@
 
-FindMyBand
-User Narrative:
-This is a really cool application which will allow users to either promote your music (bands) OR find local music in the area, also it will allows users to find cool bands near your area referencing your zip code.
+BaNd-PoRts:
+This is a really cool application which will allow users to either promote your music (bands) OR 
+find local music in the area, also it will allows users to find cool bands near your area from the zip code.
+  In this app as the name alsd says it it's a place where bands live(information about bands shows, pictures genre etc), and user can also access 
+  all the bands information too.
+  On creating this app, i have used my fullstack javascript technological skills that i have learned from General Assembly
+  , and some of these technologies can also be found on the node modules folder.
+
+  Git Hub:
+  you can find this app on this link: https://github.com/sahash182/project1
+  and to get this git clone my url.
+
+  Heroku:
+  You can also find the working version of the app on this link: https://bands-port.herokuapp.com
 
 
-<div class="container">
-		<button type="button" class="btn btn-primary btn-lg">Add New Band</button>
-	</div>
-
-	<!--Add Band Modal-->
-<div id="add-band" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Add New Band</h4>
-			</div>
-			<div class="modal-body">
-				<div class="bold">
-					Name
-				</div>
-				<div class="margin-top-20">
-					<input id="name" type="text" class="form-control" />
-				</div>
-				<div class="bold">
-					Genre
-				</div>
-				<div class="margin-top-20">
-					<input id="genre" type="text" class="form-control" />
-				</div>
-				<div class="bold">
-					ZipCode
-				</div>
-				<div class="margin-top-20">
-					<input id="zip_code" type="text" class="form-control" />
-				</div>
-				<div class="bold margin-top-20">
-					About
-				</div>
-				<div class="margin-top-20">
-					<textarea id="about" class="form-control"></textarea>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button id="submit-Band" type="button" class="btn btn-primary">Save Band</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!--/Add Wine Modal-->
-	

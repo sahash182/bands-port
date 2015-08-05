@@ -148,24 +148,32 @@ app.get("/logout", function (req, res) {
 /////////// APIs for bands routes///////////////////
 
 //get all the bands from the db
-
 app.get('/api/bands', function (req, res) {
-  // find all foods in db
   Band.find(function (err, band) {
     res.json(band);
   });
+})
+
+
+//serach bands
+
+app.get('/api/bands/:zipcode', function (req, res) {
+  // find all foods in db
+  var targetZip = req.params.zipcode;
+  // if (targetZip) {
+    console.log(targetZip);
+
+    // find phrase in db by id
+    Band.find({zipCode: targetZip}, function (err, foundBand) {
+      res.json(foundBand);
+      console.log(foundBand);
+    });
+  // } else {
+  //   Band.find(function (err, band) {
+  //     res.json(band);
+  //   });    
+  // }
 });
-
-// //find one band with zipcode
-// app.get('/api/bands/:zipcode', function (req, res) {
-//   // set the value of the id
-//   var targetZip = req.params.userZipCode;
-
-//   // find phrase in db by id
-//   Band.findOne({zipCode: targetZip}, function (err, foundBand) {
-//     res.json(foundBand);
-//   });
-// });
 
 
 //post# create

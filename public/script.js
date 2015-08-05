@@ -1,18 +1,20 @@
 $(function() {
 
-  // var baseUrl = "http://localhost:3000"; // mongoDB localhost
-  var baseUrl = "https://bands-port.herokuapp.com" //mongoDB heroku
+  var baseUrl = "http://localhost:3000"; // mongoDB localhost
+  // var baseUrl = "https://bands-port.herokuapp.com" //mongoDB heroku
 
   $band = _.template($('#bandTemplate').html());
 
   //search with requested zipcode
   $('#search-band').on('submit', function(event){
-    console.log('heloo');
     event.preventDefault();
     //find the ones with the matching zipcode
-      userZipcode = $('#search-band').val()
+      userZipcode = $('#zip-code').val();
       $.get('/api/bands/' + userZipcode, function(data){
-          var bands = data;   
+          var bands = data;  
+          console.log(bands);
+
+          // $('#bands').append($band(bands));
           // console.log($("#search-band").val()); 
           _.each(bands, function(band) {
             console.log(band);

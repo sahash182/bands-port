@@ -184,9 +184,11 @@ app.post('/api/bands', function(req, res){
       picture: req.body.picture
       
     });
+
     //save to DB
     newBand.save(function (err, savedBand){
       res.json(savedBand);
+      console.log(newBand);
     });
 });
 

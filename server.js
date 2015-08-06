@@ -151,11 +151,11 @@ app.get("/logout", function (req, res) {
 /////////// APIs for bands routes///////////////////
 
 //get all the bands from the db
-// app.get('/api/bands', function (req, res) {
-//   Band.find(function (err, band) {
-//     res.json(band);
-//   });
-// })
+app.get('/api/bands', function (req, res) {
+  Band.find(function (err, band) {
+    res.json(band);
+  });
+})
 
 
 //serach bands with zipcode

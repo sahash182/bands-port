@@ -9,6 +9,7 @@ h2{
 
 li  {
 	margin:0 auto;
+	font-style: bold;
 	list-style: none;
 	border: 2px solid;
 	text-align: center;
@@ -19,9 +20,8 @@ li  {
 }
 .bold {
 	text-align: center;
-	font-style: bolder;
+	font-style: strong;
 }
-
 .img-responsive{
 	margin: 0 auto;
 }
@@ -53,5 +53,6 @@ li  {
 }
 #bands{
 	margin: 0 auto;
-	width:400px;
+	width:600px;
+	background-color: black;
 }

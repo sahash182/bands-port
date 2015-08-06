@@ -100,12 +100,15 @@ app.post('/signup', function (req, res) {
     // log in user immediately when created
   });
 });
+
+
 //find user by id
 app.get('/api/current', function (req, res) {
   User.findById(req.session.userId).exec(function(err, user) {
     res.json(user);
   });
 });
+
 
 // authenticate user and set session
 app.post('/login', function (req, res) {
@@ -148,31 +151,25 @@ app.get("/logout", function (req, res) {
 /////////// APIs for bands routes///////////////////
 
 //get all the bands from the db
-app.get('/api/bands', function (req, res) {
-  Band.find(function (err, band) {
-    res.json(band);
-  });
-})
+// app.get('/api/bands', function (req, res) {
+//   Band.find(function (err, band) {
+//     res.json(band);
+//   });
+// })
 
 
-//serach bands
-
+//serach bands with zipcode
 app.get('/api/bands/:zipcode', function (req, res) {
   // find all foods in db
   var targetZip = req.params.zipcode;
   // if (targetZip) {
-    console.log(targetZip);
+    // console.log(targetZip);
 
-    // find phrase in db by id
+    // find band in db by zip
     Band.find({zipCode: targetZip}, function (err, foundBand) {
       res.json(foundBand);
       console.log(foundBand);
     });
-  // } else {
-  //   Band.find(function (err, band) {
-  //     res.json(band);
-  //   });    
-  // }
 });
 
 

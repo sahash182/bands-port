@@ -3,6 +3,7 @@ $(function() {
   var baseUrl = "http://localhost:3000"; // mongoDB localhost
   // var baseUrl = "https://bands-port.herokuapp.com" //mongoDB heroku
 
+  //template
   $band = _.template($('#bandTemplate').html());
 
   //search with requested zipcode
@@ -23,9 +24,8 @@ $(function() {
       }).fail(function(){
          alert("cannot find on That ZIP Code");
       }); 
-
-
   });
+
 
   //add band to find bands from db 
   $('#submit-band').on('click', function(event){
@@ -38,6 +38,7 @@ $(function() {
         picture: $('#picture').val()
     };
     console.log(bandObj);
+    
       //posting to database
     $.ajax({
       type: "POST",

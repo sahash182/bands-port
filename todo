@@ -1,13 +1,3 @@
-for search button to work :
-
-script.js:
-requesting get from the search submit form
-and receiving the found data
-rendering it to the bands div. 
-
-server .js:
--check if its getting the targeted zip,
--if this works
--see if its sending back that data back
-
-
+### search button to give error message if the zipcode not found
+### manage renderd bands
+### add a button to find all bands

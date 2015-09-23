@@ -60,3 +60,10 @@ li  {
 	width:600px;
 	background-color: black;
 }
+#myCarousel{
+	width: 700px;
+	height: 400px;
+}
+#sidebar{
+	opacity: 0.9;
+}

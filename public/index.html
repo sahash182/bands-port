@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- resposive for most devices -->
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- resposive for most devices -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
- <!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
- <!-- custom styles -->
+  <!-- custom styles -->
   <link type="text/css" rel="stylesheet" href="style.css">
 
-	<title>Bands-Port</title><br>
+  <title>Bands-Port</title><br>
 
 </head>
 <body>
-	  <br>
-  		
-        <div class="alignright">
-          <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#signup-modal" id="signup-btn">Sign Up</button>
-          <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#login-modal" id="login-btn">Login</button>
-          <button class="btn btn-primary" type="button" id="logout-btn">Logout</button>
-        </div>
-    		<h2> BaNd-PorTs</h2>
-        <button class=" btn btn-primary" type="button" data-toggle="modal" data-target="#add-band" id="add-btn">Add Band</button>
+ <br>
+ 
+ <div class="alignright">
+  <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#signup-modal" id="signup-btn">Sign Up</button>
+  <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#login-modal" id="login-btn">Login</button>
+  <button class="btn btn-primary" type="button" id="logout-btn">Logout</button>
+</div>
+<h2> BaNd-PorTs</h2>
+<button class=" btn btn-primary" type="button" data-toggle="modal" data-target="#add-band" id="add-btn">Add Band</button>
 
-    	<!-- main body/ columns -->
-  <div class="col-md-7">
-    <!-- well for the template data -->
-    <div class ="well" id="bands">
-    </div>
-  	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<!-- main body/ columns -->
+<div class="col-md-7">
+  <!-- well for the template data -->
+  <div class ="well" id="bands">
+  </div>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -73,153 +73,150 @@
   
 
 </div>
-    		<div class="col-md-5" id='sidebar'>
-    			<div class="well" id="news-feed">
-            <!-- news for seed data -->
-            <h2><center>BANDS NETWORK</center></h2>
-            <li>Promote you band</li>
-            <li>Watch your favorite bands</li>
-            <li>Find Local Talents</li>
-            <li>New Releases</li><br>
-              <!-- search bands form -->
-            <form id="search-band">
-              <div class='form-group'>
-                <h3><label for="text">Search Bands:</label></h3>
-                <input class="form-control" id="zip-code" type="text" name="text" placeholder="Your ZipCode?"/>
-              </div>
-              <div class='text-right'>
-                <button class="btn btn-info" id="find-band" type="submit">Search Bands</button>
-                <br>
-                <small class='text-muted'>Find Bands in your Area...</small>
-              </div>
-            </form>   
-            <br>
-  				</div>  		
-    		</div>
-	</div>
-	
+<div class="well col-md-5" id='sidebar'>
+  <!-- news for seed data -->
+  <h2><center>BANDS NETWORK</center></h2>
+  <li>Promote you band</li>
+  <li>Watch your favorite bands</li>
+  <li>Find Local Talents</li>
+  <li>New Releases</li><br>
+  <!-- search bands form -->
+  <form id="search-band">
+    <div class='form-group'>
+      <h3><label for="text">Search Bands:</label></h3>
+      <input class="form-control" id="zip-code" type="text" name="text" placeholder="Your ZipCode?"/>
+    </div>
+    <div class='text-right'>
+      <button class="btn btn-info" id="find-band" type="submit">Search Bands</button>
+      <br>
+      <small class='text-muted'>Find Bands in your Area...</small>
+    </div>
+  </form>   
+  <br>		
+</div>
 
 
 
-	<!--Add Band Modal-->
-	<div id="add-band" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Add New Band</h4>
-				</div>
-				<div class="modal-body">
-					<div class="bold">
-						Name:
-					</div>
-					<div class="margin-top-20">
-						<input id="name" type="text" class="form-control" />
-					</div>
-					<div class="bold">
-						Genre:
-					</div>
-					<div class="margin-top-20">
-						<input id="genre" type="text" class="form-control" />
-					</div>
-					<div class="bold">
-						ZipCode:
-					</div>
-					<div class="margin-top-20">
-						<input id="zip-code" type="text" class="form-control" />
-					</div>
-					<div class="bold">
-						Picture(url):
-					</div>
-					<div class="margin-top-20">
-						<input id="picture" type="text" class="form-control" />
-					</div>
-          <div class="bold margin-top-20">
-            About:
-          </div>
-          <div class="margin-top-20">
-            <textarea id="about" class="form-control"></textarea>
-          </div>				
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-					<button id="submit-band" type="button" class="btn btn-primary">Save Band</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-	<!--/Add Band Modal-->
+
+<!--Add Band Modal-->
+<div id="add-band" class="modal fade">
+  <div class="modal-dialog">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+     <h4 class="modal-title">Add New Band</h4>
+   </div>
+   <div class="modal-body">
+     <div class="bold">
+      Name:
+    </div>
+    <div class="margin-top-20">
+      <input id="name" type="text" class="form-control" />
+    </div>
+    <div class="bold">
+      Genre:
+    </div>
+    <div class="margin-top-20">
+      <input id="genre" type="text" class="form-control" />
+    </div>
+    <div class="bold">
+      ZipCode:
+    </div>
+    <div class="margin-top-20">
+      <input id="zip-code" type="text" class="form-control" />
+    </div>
+    <div class="bold">
+      Picture(url):
+    </div>
+    <div class="margin-top-20">
+      <input id="picture" type="text" class="form-control" />
+    </div>
+    <div class="bold margin-top-20">
+      About:
+    </div>
+    <div class="margin-top-20">
+      <textarea id="about" class="form-control"></textarea>
+    </div>				
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+   <button id="submit-band" type="button" class="btn btn-primary">Save Band</button>
+ </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--/Add Band Modal-->
 
 
-	<!-- signup modal -->
-  <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signupModal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
-        </div>
-        <form class="signup-form" id="signup">
-          <div class="modal-body">
-            <div class="form-group">
-              <input type="text" name="user[firstName]" id="signup-firstName" class="form-control" placeholder="First Name">
-            </div>
-            <div class="form-group">
-              <input type="text" name="user[lastName]"  id="signup-lastName"class="form-control" placeholder="Last Name">
-            </div>
-            <div class="form-group">
-              <input type="email" name="user[email]" id="signup-email" class="form-control" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <input type="password" name="user[password]" id="signup-password" class="form-control" placeholder="Password">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <input type="submit" value="Sign Up" class="btn btn-primary">
-          </div>
-        </form>
+<!-- signup modal -->
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signupModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
       </div>
+      <form class="signup-form" id="signup">
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" name="user[firstName]" id="signup-firstName" class="form-control" placeholder="First Name">
+          </div>
+          <div class="form-group">
+            <input type="text" name="user[lastName]"  id="signup-lastName"class="form-control" placeholder="Last Name">
+          </div>
+          <div class="form-group">
+            <input type="email" name="user[email]" id="signup-email" class="form-control" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <input type="password" name="user[password]" id="signup-password" class="form-control" placeholder="Password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <input type="submit" value="Sign Up" class="btn btn-primary">
+        </div>
+      </form>
     </div>
   </div>
+</div>
 
 
-  <!-- login modal -->
-  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="loginModal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Log In</h4>
-        </div>
-        <form class="login-form" id="login">
-          <div class="modal-body">
-            <div class="form-group">
-              <input type="email" name="user[email]" id="login-email" class="form-control" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <input type="password" name="user[password]" id="login-password" class="form-control" placeholder="Password">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <input type="submit" href="/user" value="Log In" class="btn btn-primary">
-          </div>
-        </form>
+<!-- login modal -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="loginModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Log In</h4>
       </div>
+      <form class="login-form" id="login">
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="email" name="user[email]" id="login-email" class="form-control" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <input type="password" name="user[password]" id="login-password" class="form-control" placeholder="Password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <input type="submit" href="/user" value="Log In" class="btn btn-primary">
+        </div>
+      </form>
     </div>
   </div>
+</div>
 
-	<script id="bandTemplate" type="text/template">
-    <li class='band'>
-    	<img src="<%= picture %>"  width="200px" class="img-responsive" />&nbsp;
-      	<p class='bold'>Name: <%= name %></p>
-      	<p class='bold'>Genre: <%= genre %></p>
-      	<p class='bold'>Zip Code: <%= zipCode %></p>
-      	<p class='bold'>About: <%= about %></p>
-    </li>
-    <br>
-  </script>
+<script id="bandTemplate" type="text/template">
+<li class='band'>
+<img src="<%= picture %>"  width="200px" class="img-responsive" />&nbsp;
+<p class='bold'>Name: <%= name %></p>
+<p class='bold'>Genre: <%= genre %></p>
+<p class='bold'>Zip Code: <%= zipCode %></p>
+<p class='bold'>About: <%= about %></p>
+</li>
+<br>
+</script>
 
 <!--jQuery-->
 <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>

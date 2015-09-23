@@ -1,15 +1,22 @@
 
-BaNd-PoRts:
-This is a really cool application which will allow users to either promote your music (bands) OR 
-find local music in the area, also it will allows users to find cool bands near your area from the zip code.
-  In this app as the name alsd says it it's a place where bands live(information about bands shows, pictures genre etc), and user can also access 
-  all the bands information too.
-  On creating this app, i have used my fullstack javascript technological skills that i have learned from General Assembly
-  , and some of these technologies can also be found on the node modules folder.
+Band-ports is a simple app about bands. In this app users can add their local bands with the zipcode and also search for the local bands using zipcode. This app is built in MEN stack with MongoDB.
 
-  Git Hub:
-  you can find this app on this link: https://github.com/sahash182/project1
-  and to get this git clone my url.
+Instruction for running in local machine:
+
+clone set up:
+- git clone https://github.com/sahash182/bands-port.git
+
+Database set up :
+- install mongoDB
+- run mongod from you root directory
+
+run server:
+if you have nodemon install then type "nodemon" in terminal's root directory
+or,
+in your root directory type "node server.js" to run server
+
+visit: localhost:3000
+
 
   Heroku:
   You can also find the working version of the app on this link: https://bands-port.herokuapp.com

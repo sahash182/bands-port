@@ -44,12 +44,16 @@ li  {
     display: inline;
 }
 #sidebar{
-	background-color: black;
+	width:300px;
+	opacity: 50%;
 }
 #add-btn{
 	margin-bottom: 20px;
 	margin-left: 45%;
 	width: 100px;
+}
+#sidebar{
+	background-color: red;
 }
 #bands{
 	margin: 0 auto;
